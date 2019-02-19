@@ -9,6 +9,7 @@ interface Policy
     /**
      * @param $request
      * @return mixed
+     * @throws PolicyException
      */
     public function execute($request);
 }

@@ -8,7 +8,18 @@ use App\Domain\Payment\PaymentDetails;
 
 class Billing
 {
+    /* @var string */
     private $id;
+
+    public function __construct(string $id)
+    {
+        $this->id = $id;
+    }
+
+    public function id(): string
+    {
+        return $this->id;
+    }
 
     public function isBlocked(): bool
     {
@@ -42,14 +53,9 @@ class Billing
 
     }
 
-    public function __construct(string $id)
-    {
-        $this->id = $id;
-    }
-
     public function setPaymentDetails(PaymentDetails $paymentDetails)
     {
-        // TODO: Set paymentDetails, unblock and set paid
+        // Set paymentDetails, unblock and set paid
 
         EventPublisher::publish(new BillingPaid($this->id));
     }

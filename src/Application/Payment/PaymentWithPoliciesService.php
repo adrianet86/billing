@@ -22,11 +22,13 @@ class PaymentWithPoliciesService
      * @throws \App\Domain\Billing\BillingBlockedException
      * @throws \App\Domain\Billing\BillingPaidException
      * @throws \App\Domain\Payment\PaymentDeclinedException
+     * @throws \App\Domain\Policy\PolicyException
      * @throws \Exception
      *
      */
     public function execute(PaymentRequest $paymentRequest)
     {
+        // TODO: write logs ¿?
         $this->executePolicies($paymentRequest->policyDetails());
 
         return $this->paymentService->execute($paymentRequest);
@@ -34,6 +36,7 @@ class PaymentWithPoliciesService
 
     /**
      * @param $policyDetails
+     * @throws \App\Domain\Policy\PolicyException
      */
     private function executePolicies($policyDetails): void
     {

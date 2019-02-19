@@ -16,6 +16,6 @@ class FakeBillingRepository implements BillingRepository
      */
     public function byId(string $id): Billing
     {
-        new Billing($id);
+        return new Billing($id);
     }
 }

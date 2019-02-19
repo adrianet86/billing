@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Infrastructure\External\Log;
+namespace App\Infrastructure\Repository\Log;
 
 
 use App\Domain\Log\LogAdapter;
 use App\Domain\Log\LogAdapterException;
 
-class AwsLogAdapter implements LogAdapter
+class FakeLogAdapterRepository implements LogAdapter
 {
     /**
      * @param string $message

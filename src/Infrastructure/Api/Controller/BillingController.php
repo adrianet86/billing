@@ -11,10 +11,11 @@ use App\Domain\Billing\BillingPaidException;
 use App\Domain\Payment\PaymentDeclinedException;
 use App\Domain\Payment\PaymentMethod;
 use App\Domain\Policy\FraudPolicy;
-use App\Infrastructure\External\Log\AwsLogAdapter;
+use App\Domain\Policy\PolicyException;
 use App\Infrastructure\External\Payment\CreditCardPaymentMethod;
 use App\Infrastructure\External\Payment\PayPalPaymentMethod;
 use App\Infrastructure\Repository\Billing\FakeBillingRepository;
+use App\Infrastructure\Repository\Log\FakeLogAdapterRepository;
 
 /**
  * @Route("/api/billing")
@@ -51,7 +52,7 @@ class BillingController
             $paymentService = new PaymentService(
                 $paymentMethod,
                 new FakeBillingRepository(),
-                new AwsLogAdapter()
+                new FakeLogAdapterRepository()
             );
 
             $paymentWithPoliciesService = new PaymentWithPoliciesService(
@@ -72,6 +73,8 @@ class BillingController
         } catch (BillingPaidException $exception) {
             $httpCode = 412;
         } catch (PaymentDeclinedException $exception) {
+            $httpCode = 403;
+        } catch (PolicyException $exception) {
             $httpCode = 403;
         } catch (\Exception $exception) {
             $httpCode = 500;
