@@ -41,9 +41,9 @@ class PaymentWithPoliciesService
     private function executePolicies($policyDetails): void
     {
         if (!empty($this->policies)) {
-            /* @var Policy $policy */
             foreach ($this->policies as $policy) {
                 if ($policy instanceof Policy) {
+                    /* @var Policy $policy */
                     $policy->execute($policyDetails);
                 }
             }
