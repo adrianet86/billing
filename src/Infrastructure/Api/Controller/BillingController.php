@@ -62,7 +62,7 @@ class BillingController
 
             $paymentWithPoliciesService->execute(new PaymentRequest(
                 $billingId,
-                $request['credit_card'],
+                $request,
                 $policyDetails
             ));
 
@@ -92,7 +92,7 @@ class BillingController
      */
     public function paymentByPayPal(string $billingId, $request)
     {
-        return $this->makePayment($billingId, $request, new PayPalPaymentMethod());
+        return $this->makePayment($billingId, $request['paypal'], new PayPalPaymentMethod());
     }
 
     /**
@@ -104,7 +104,7 @@ class BillingController
      */
     public function paymentByCreditCard(string $billingId, $request)
     {
-        return $this->makePayment($billingId, $request, new CreditCardPaymentMethod());
+        return $this->makePayment($billingId, $request['credit-card'], new CreditCardPaymentMethod());
     }
 
 }
