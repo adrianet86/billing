@@ -14,6 +14,6 @@ class FakeLogAdapterRepository implements LogAdapter
      */
     public function log(string $message): void
     {
-        // TODO: Implement to write in Amazon Web Service CloudWatch Logs.
+        // TODO
     }
 }
