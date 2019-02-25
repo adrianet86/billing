@@ -51,7 +51,7 @@ class PaymentService
             $billing->block();
 
             $this->log(
-                'INFO',
+                self::LOG_LEVEL_INFO,
                 'PAYING BILLING: ' . $paymentRequest->billingId()
                 . ' METHOD: ' . get_class($this->paymentMethod)
                 . ' PAYMENT DETAILS: ' . json_encode($paymentRequest->paymentDetails())
@@ -59,7 +59,7 @@ class PaymentService
             $paymentDetails = $this->paymentMethod->payBilling($billing, $paymentRequest->paymentDetails());
 
             $this->log(
-                'INFO',
+                self::LOG_LEVEL_INFO,
                 'PAYMENT COMPLETED: ' . $paymentRequest->billingId()
                 . ' REFERENCE: ' . $paymentDetails->id()
             );
